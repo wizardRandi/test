@@ -1,0 +1,43 @@
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+
+# Set Chrome driver path
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+
+# Implicit wait
+driver.implicitly_wait(10)
+
+# Launch URL
+driver.get("https://www.facebook.com/")
+
+# identify elements within form
+f = driver.find_element("id", "email")
+f.send_keys("Pranit")
+x = driver.find_element("id", "pass")
+x.send_keys("pass@123")
+# u = driver.find_element("id", "username")
+# u.send_keys("test124ewin")
+# p = driver.find_element("name", "Passwd")
+# p.send_keys("test124@")
+# c = driver.find_element("name", "ConfirmPasswd")
+# c.send_keys("test124@")
+
+# Get value entered
+s = f.get_attribute("value")
+t = x.get_attribute("value")
+# v = u.get_attribute("value")
+# w = p.get_attribute("value")
+print("Values entered in form: ")
+print("First Name:- ", s)
+print("Last Name:- ", t)
+# print("Username:- ", v)
+# print("Password:- ", w)
+
+# Submit form
+b = driver.find_element(By.CLASS_NAME, "_42ft _4jy0 _6lth _4jy6 _4jy1 selected _51sy")
+b.click()
+
+# Browser quit
+driver.quit()
