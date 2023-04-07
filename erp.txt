@@ -1,0 +1,35 @@
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+
+# Set Chrome driver path
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+
+
+# Implicit wait
+driver.implicitly_wait(60)
+
+# Launch URL
+driver.get("https://learner.pceterp.in/")
+
+# identify elements within form
+u = driver.find_element(By.ID, 'input-28')
+u.send_keys("sayali.sable21@pccoepune.org")
+b = driver.find_element(By.CSS_SELECTOR,'#signinusername > center > button > span')
+b.click()
+p = driver.find_element(By.ID, 'input-34')
+p.send_keys("password")
+b = driver.find_element(By.CSS_SELECTOR,'#signinpassword > center:nth-child(3) > button > span')
+b.click()
+
+# Print the values entered
+s = u.get_attribute("value")
+t = p.get_attribute("value")
+
+print("Values entered:-")
+print("Username:- ",s)
+print("Password:- ",t)
+
+# Browser quit
+driver.quit()
