@@ -1,0 +1,41 @@
+import time
+import unittest
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+# Variables
+driver_path="C:\\Users\\kaush\\OneDrive\\Desktop\\chromedriver_win32\\chromedriver.exe"
+navigate_url = "https://codeforces.com/enter?back=%2Fcontests"
+
+class DemoqaTesting(unittest.TestCase):
+
+    def setUp(self):
+        self.driver = webdriver.Chrome(executable_path=driver_path)
+        self.driver.maximize_window()
+        self.driver.get(navigate_url)
+        self.driver.implicitly_wait(10)
+
+    def tearDown(self):
+        self.driver.quit()
+
+    def test_automate_form(self):
+        # Enter First Name
+        user_name = self.driver.find_element("name","handleOrEmail")
+        user_name.send_keys('Kaushal2610')
+
+        # Enter Last Name
+        pass_word = self.driver.find_element("name","password")
+        pass_word.send_keys('Kaushal@2610')
+
+        rem = self.driver.find_element("id", "remember")
+        rem.click()
+
+        login = self.driver.find_element(By.CLASS_NAME, "submit")
+        login.click()
+
+        time.sleep(10)
+
+
+if _name=='main_':
+    unittest.main()
